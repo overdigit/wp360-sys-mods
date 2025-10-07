@@ -1,0 +1,14 @@
+Source: wp360-sys-mods
+Section: misc
+Priority: optional
+Maintainer: Overdigit <info@overdigit.com>
+Build-Depends: debhelper-compat (= 13)
+Standards-Version: 4.5.1
+#Homepage: <insert the upstream URL, if relevant>
+Rules-Requires-Root: no
+
+Package: wp360-sys-mods
+Architecture: all
+Maintainer: Overdigit <info@overdigit.com>
+Depends: ${misc:Depends}, initramfs-tools
+Description: Miscellaneous system modifications for the WP360 PLC.
