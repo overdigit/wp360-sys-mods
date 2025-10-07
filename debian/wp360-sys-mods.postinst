@@ -19,5 +19,6 @@ Linux.Devicefile.4=/dev/ttyWP360-4
 PlaceholderFilePath.1=/media/user,$DRIVES$
 PlaceholderFilePath.1.Volatile=1
 EOF
+    fi
     ;;
 esac
