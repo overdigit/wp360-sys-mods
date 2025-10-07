@@ -5,9 +5,11 @@ Source: <url://example.com>
 #
 # Please double check copyright with the licensecheck(1) command.
 
-Files:     .gitignore
-           Makefile
+Files:     Makefile
            wp360-firstboot
+           debian/control
+           debian/README.debian
+           debian/changelog
 Copyright: __NO_COPYRIGHT_NOR_LICENSE__
 License:   __NO_COPYRIGHT_NOR_LICENSE__
 
