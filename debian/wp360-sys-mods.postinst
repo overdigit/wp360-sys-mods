@@ -7,9 +7,9 @@ case $1 in
   triggered)
     if [[ -f "$2" ]]
     then
-      crtime=$(stat -c '%w' "$2")
-      mtime=$(stat -c '%y' "$2")
-      if [[ "$crtime" == "$mtime" ]]
+      crtime=$(stat -c '%W' "$2")
+      mtime=$(stat -c '%Y' "$2")
+      if [[ "$crtime" -ge "$mtime" ]]
       then
         cat >> "$2" <<- \EOF
 [SysCom]
