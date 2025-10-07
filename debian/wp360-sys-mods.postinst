@@ -5,11 +5,13 @@ case $1 in
     dpkg-trigger update-initramfs
     ;;
   triggered)
-    local crtime=$(stat -c '%w' "$2")
-    local mtime=$(stat -c '%y' "$2")
-    if [[ "$crtime" == "$mtime" ]]
+    if [[ -f "$2" ]]
     then
-      cat >> "$2" <<- \EOF
+      crtime=$(stat -c '%w' "$2")
+      mtime=$(stat -c '%y' "$2")
+      if [[ "$crtime" == "$mtime" ]]
+      then
+        cat >> "$2" <<- \EOF
 [SysCom]
 Linux.Devicefile.2=/dev/ttyWP360-2
 Linux.Devicefile.3=/dev/ttyWP360-3
@@ -19,6 +21,7 @@ Linux.Devicefile.4=/dev/ttyWP360-4
 PlaceholderFilePath.1=/media/user,$DRIVES$
 PlaceholderFilePath.1.Volatile=1
 EOF
+      fi
     fi
     ;;
 esac
