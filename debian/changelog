@@ -1,3 +1,9 @@
+wp360-sys-mods (1.2.1-1) UNRELEASED; urgency=medium
+
+  * Fix cut syntax for busybox.
+
+ -- Overdigit <info@overdigit.com>  Mon, 20 Oct 2025 19:43:07 +0200
+
 wp360-sys-mods (1.2.0-2) trixie; urgency=low
 
   * Move script to local-premount.

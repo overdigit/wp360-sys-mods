@@ -63,7 +63,7 @@ EEOF
 
 fix_diskid () {
   OLD_DISKID="$(dd if="$ROOT_DEV" bs=4 count=1 skip=110 status=none | od -An -tx4 | cut -c2-9)"
-  DISKID="$(cut /sys/class/net/eth0/address -d: -f3-6 --output-delimiter=)"
+  DISKID="$(cut /sys/class/net/eth0/address -d: -f3-6 | tr -d :)"
   fdisk "$ROOT_DEV" <<EEOF
 x
 i
