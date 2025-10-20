@@ -1,3 +1,9 @@
+wp360-sys-mods (1.2.0-2) trixie; urgency=low
+
+  * Move script to local-premount.
+
+ -- Overdigit <info@overdigit.com>  Mon, 20 Oct 2025 19:03:07 +0200
+
 wp360-sys-mods (1.2.0-1) trixie; urgency=low
 
   * Adapted to Raspberry OS Trixie first boot process.
