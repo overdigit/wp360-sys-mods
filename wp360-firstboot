@@ -93,6 +93,7 @@ if ! [ -b "${ROOT_DEV}5" ]; then
   do_resize
   fix_diskid
   log_end_msg
+  reboot -f
 else
   log_warning_msg "Resize skipped due to unexpected partition table"
 fi
