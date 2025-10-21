@@ -62,6 +62,10 @@ EEOF
 }
 
 fix_diskid () {
+  mkdir -p /run/wp360-firstboot
+  mount -o remount,rw "$ROOT" "${rootmnt?}/"
+  mount -o rw "$(resolve_device "$BOOT_PART_DEV")" /run/wp360-firstboot/
+
   OLD_DISKID="$(dd if="$ROOT_DEV" bs=4 count=1 skip=110 status=none | od -An -tx4 | cut -c2-9)"
   DISKID="$(cut /sys/class/net/eth0/address -d: -f3-6 | tr -d :)"
   fdisk "$ROOT_DEV" <<EEOF
@@ -70,10 +74,6 @@ i
 0x$DISKID
 r
 EEOF
-
-  mkdir -p /run/wp360-firstboot
-  mount -o remount,rw "$ROOT" "${rootmnt?}/"
-  mount -o rw "$(resolve_device "$BOOT_PART_DEV")" /run/wp360-firstboot/
 
   sed -i 's| wp360-firstboot||g' /run/new_diskid/cmdline.txt
   sed -i "s/$OLD_DISKID/$DISKID/g" "${rootmnt?}/etc/fstab"
@@ -92,9 +92,9 @@ get_variables
 if ! [ -b "${ROOT_DEV}5" ]; then
   do_resize
   fix_diskid
+  log_end_msg
 else
   log_warning_msg "Resize skipped due to unexpected partition table"
 fi
-log_end_msg
 
 exit 0
