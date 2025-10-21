@@ -3,6 +3,7 @@ wp360-sys-mods (1.2.1-1) UNRELEASED; urgency=medium
   * Fix cut syntax for busybox.
   * Mount root before modifying disk ID.
   * Reboot after modifying disk ID.
+  * Set disk ID directly with dd.
 
  -- Overdigit <info@overdigit.com>  Mon, 20 Oct 2025 19:43:07 +0200
 

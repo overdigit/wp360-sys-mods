@@ -63,24 +63,20 @@ EEOF
 
 fix_diskid () {
   mkdir -p /run/wp360-firstboot
-  mount -o remount,rw "$ROOT" "${rootmnt?}/"
-  mount -o rw "$(resolve_device "$BOOT_PART_DEV")" /run/wp360-firstboot/
+  mount -o rw "$DEV" "${rootmnt?}/"
+  mount -o rw "${DEV%%?}1" /run/wp360-firstboot/
 
   OLD_DISKID="$(dd if="$ROOT_DEV" bs=4 count=1 skip=110 status=none | od -An -tx4 | cut -c2-9)"
   DISKID="$(cut /sys/class/net/eth0/address -d: -f3-6 | tr -d :)"
-  fdisk "$ROOT_DEV" <<EEOF
-x
-i
-0x$DISKID
-r
-EEOF
+  local d="$DISKID"
+  echo ${d:6:2}${d:4:2}${d:2:2}${d:0:2} | xxd -r -p | dd of="$ROOT_DEV" bs=4 count=1 seek=110 status=none
 
-  sed -i 's| wp360-firstboot||g' /run/new_diskid/cmdline.txt
+  sed -i 's| wp360-firstboot||g' /run/wp360-firstboot/cmdline.txt
   sed -i "s/$OLD_DISKID/$DISKID/g" "${rootmnt?}/etc/fstab"
-  sed -i "s/$OLD_DISKID/$DISKID/" /run/new_diskid/cmdline.txt 
-  umount /run/new_diskid
-  mount -o remount,ro "$ROOT" "${rootmnt?}/"
-  rmdir /run/new_diskid
+  sed -i "s/$OLD_DISKID/$DISKID/" /run/wp360-firstboot/cmdline.txt 
+  umount /run/wp360-firstboot
+  umount "${rootmnt?}/"
+  rmdir /run/wp360-firstboot
 }
 
 . /scripts/functions
