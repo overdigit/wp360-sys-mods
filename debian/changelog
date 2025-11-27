@@ -1,3 +1,9 @@
+wp360-sys-mods (1.2.2-1) trixie; urgency=low
+
+  * Configure update-initramfs to update initramfs for all kernels.
+
+ -- Overdigit <info@overdigit.com>  Thu, 27 Nov 2025 12:39:33 +0100
+
 wp360-sys-mods (1.2.1-1) trixie; urgency=low
 
   * Fix cut syntax for busybox.

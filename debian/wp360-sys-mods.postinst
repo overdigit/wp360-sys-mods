@@ -3,6 +3,7 @@
 case $1 in
   configure)
     dpkg-trigger update-initramfs
+    sed -i 's/update_initramfs=yes/update_initramfs=all/' /etc/initramfs-tools/update-initramfs.conf
     ;;
   triggered)
     if [[ -f "$2" ]]
