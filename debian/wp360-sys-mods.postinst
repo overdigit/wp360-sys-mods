@@ -13,13 +13,14 @@ case $1 in
       if [[ "$crtime" -ge "$mtime" ]]
       then
         cat >> "$2" <<- \EOF
+
 [SysCom]
 Linux.Devicefile.2=/dev/ttyWP360-2
 Linux.Devicefile.3=/dev/ttyWP360-3
 Linux.Devicefile.4=/dev/ttyWP360-4
 
 [SysFile]
-PlaceholderFilePath.1=/media/user,$DRIVES$
+PlaceholderFilePath.1=/media/root,$DRIVES$
 PlaceholderFilePath.1.Volatile=1
 EOF
       fi

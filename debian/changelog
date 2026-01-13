@@ -1,3 +1,9 @@
+wp360-sys-mods (1.2.2-2) trixie; urgency=low
+
+  * Update removable drives path.
+
+ -- Overdigit <info@overdigit.com>  Tue, 13 Jan 2026 17:17:46 +0100
+
 wp360-sys-mods (1.2.2-1) trixie; urgency=low
 
   * Configure update-initramfs to update initramfs for all kernels.
