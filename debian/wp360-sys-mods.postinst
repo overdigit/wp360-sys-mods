@@ -10,7 +10,7 @@ case $1 in
     then
       crtime=$(stat -c '%W' "$2")
       mtime=$(stat -c '%Y' "$2")
-      if [[ "$crtime" -ge "$mtime" ]]
+      if [[ "$crtime" -ge "$mtime" ]] && ! grep -q '\[SysCom\]' "$2"
       then
         cat >> "$2" <<- \EOF
 

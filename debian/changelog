@@ -1,3 +1,9 @@
+wp360-sys-mods (1.2.2-3) trixie; urgency=low
+
+  * Update config file modification detection.
+
+ -- Overdigit <info@overdigit.com>  Wed, 14 Jan 2026 12:31:24 +0100
+
 wp360-sys-mods (1.2.2-2) trixie; urgency=low
 
   * Update removable drives path.
