@@ -48,13 +48,16 @@ case $1 in
     update_user_cfg
     ;;
   triggered)
-    case "$2" in
-      "/etc/codesyscontrol/CODESYSControl.cfg")
-        update_cfg "$2"
-        ;;
-      "/etc/codesyscontrol/CODESYSControl_User.cfg")
-        update_user_cfg "$2"
-        ;;
-    esac
+    for file in $2
+    do
+      case "$file" in
+        "/etc/codesyscontrol/CODESYSControl.cfg")
+          update_cfg "$file"
+          ;;
+        "/etc/codesyscontrol/CODESYSControl_User.cfg")
+          update_user_cfg "$file"
+          ;;
+      esac
+    done
     ;;
 esac
