@@ -1,6 +1,10 @@
 #!/bin/bash
 
 update_user_cfg() {
+  if [[ ! -f "$1" ]]
+  then
+    exit 0
+  fi
   if ! grep -q '\[SysCom\]' "$1"
   then
     sed -E '/^\[(SysFile|SysCom)\]$/,/^$/d' -i "$1"
@@ -21,6 +25,10 @@ EOF
 }
 
 update_cfg() {
+  if [[ ! -f "$1" ]]
+  then
+    exit 0
+  fi
   if ! grep -q '\[SysProcess\]' "$1"
   then
     cat >> "$1" <<- \EOF
@@ -40,10 +48,6 @@ case $1 in
     update_user_cfg
     ;;
   triggered)
-    if [[ ! -f "$2" ]]
-    then
-      exit 0
-    fi
     case "$2" in
       "/etc/codesyscontrol/CODESYSControl.cfg")
         update_cfg "$2"
