@@ -73,7 +73,13 @@ fix_diskid () {
 
   sed -i 's| wp360-firstboot||g' /run/wp360-firstboot/cmdline.txt
   sed -i "s/$OLD_DISKID/$DISKID/g" "${rootmnt?}/etc/fstab"
-  sed -i "s/$OLD_DISKID/$DISKID/" /run/wp360-firstboot/cmdline.txt 
+  sed -i "s/$OLD_DISKID/$DISKID/" /run/wp360-firstboot/cmdline.txt
+
+  serial=$(grep Serial /proc/cpuinfo | sed -E 's/Serial\s+:\s+//')
+  host="wp360-${serial:0:8}"
+  echo "$host" > "${rootmnt?}/etc/hostname"
+  sed -E -i "s/127.0.1.1\s+.+/127.0.1.1\t\t$host/" "${rootmnt?}/etc/hosts"
+
   umount /run/wp360-firstboot
   umount "${rootmnt?}/"
   rmdir /run/wp360-firstboot
