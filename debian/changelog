@@ -1,3 +1,9 @@
+wp360-sys-mods (1.3.2-2) trixie; urgency=low
+
+  * Allow Codesys to access /media (usb automount mountpoint).
+
+ -- Overdigit <info@overdigit.com>  Thu, 16 Jul 2026 17:59:36 +0200
+
 wp360-sys-mods (1.3.2-1) trixie; urgency=low
 
   * Use MAC address for hostname instead of CPU serial.
