@@ -1,3 +1,9 @@
+wp360-sys-mods (1.3.2-3) trixie; urgency=low
+
+  * Move CODESYS-related mods to wp360-codesys-bridge.
+
+ -- Overdigit <info@overdigit.com>  Thu, 30 Jul 2026 17:27:34 +0200
+
 wp360-sys-mods (1.3.2-2) trixie; urgency=low
 
   * Allow Codesys to access /media (usb automount mountpoint).
