@@ -1,63 +1,8 @@
 #!/bin/bash
 
-update_user_cfg() {
-  if [[ ! -f "$1" ]]
-  then
-    exit 0
-  fi
-  if ! grep -q '\[SysCom\]' "$1"
-  then
-    sed -E '/^\[(SysFile|SysCom)\]$/,/^$/d' -i "$1"
-    cat >> "$1" <<- \EOF
-
-[SysCom]
-Linux.Devicefile.2=/dev/ttyWP360-2
-Linux.Devicefile.3=/dev/ttyWP360-3
-Linux.Devicefile.4=/dev/ttyWP360-4
-
-[SysFile]
-PlaceholderFilePath.1=/media,$DRIVES$
-PlaceholderFilePath.1.Volatile=1
-PlaceholderFilePath.2=/sys/kernel/wp360-pmuc,$PMUC$
-
-EOF
-  fi
-}
-
-update_cfg() {
-  if [[ ! -f "$1" ]]
-  then
-    exit 0
-  fi
-  if ! grep -q '\[SysProcess\]' "$1"
-  then
-    cat >> "$1" <<- \EOF
-
-[SysProcess]
-BasePriority=Realtime
-Command.0=wp360-codesys-bridge
-EOF
-  fi
-}
-
 case $1 in
   configure)
     dpkg-trigger update-initramfs
     sed -i 's/update_initramfs=yes/update_initramfs=all/' /etc/initramfs-tools/update-initramfs.conf
-    update_cfg
-    update_user_cfg
-    ;;
-  triggered)
-    for file in $2
-    do
-      case "$file" in
-        "/etc/codesyscontrol/CODESYSControl.cfg")
-          update_cfg "$file"
-          ;;
-        "/etc/codesyscontrol/CODESYSControl_User.cfg")
-          update_user_cfg "$file"
-          ;;
-      esac
-    done
     ;;
 esac
